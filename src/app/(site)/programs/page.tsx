@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { programs } from "@/lib/site";
+import { asset, programs } from "@/lib/site";
 import { programIcons, ArrowRightIcon, CheckIcon } from "@/components/icons";
 
 export const metadata: Metadata = {
@@ -51,7 +51,7 @@ export default function ProgramsPage() {
                     <div className="aspect-[4/3]">
                       {/* TODO: real programme photograph */}
                       <img
-                        src={p.image}
+                        src={asset(p.image)}
                         alt={p.name}
                         loading="lazy"
                         decoding="async"

@@ -1,7 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { getImpactStats } from "@/lib/gallery";
-import { stats as seedStats } from "@/lib/site";
+import ImpactGrid from "@/components/data/ImpactGrid";
 import { ArrowRightIcon } from "@/components/icons";
 
 export const metadata: Metadata = {
@@ -10,12 +9,8 @@ export const metadata: Metadata = {
     "Measured results from Lelwak Stars CBO: seedlings grown, youth trained, students mentored and community education reached.",
 };
 
-export const revalidate = 300;
 
 export default async function ImpactPage() {
-  const live = await getImpactStats();
-  const rows = live ?? seedStats;
-
   return (
     <div className="pt-[7.5rem]">
       <header className="grain relative overflow-hidden bg-forest-800 py-20 text-cream-200 md:py-24">
@@ -34,33 +29,7 @@ export default async function ImpactPage() {
 
       <section className="section bg-cream-200">
         <div className="shell">
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {rows.map((s) => {
-              const percent = "percent" in s ? s.percent : null;
-              const value = "value" in s ? s.value : null;
-              const label = "label" in s ? s.label : "";
-              const note = "note" in s ? s.note : "";
-              return (
-                <article key={"id" in s ? String(s.id) : label} className="stat-card" data-reveal>
-                  <p className="font-display text-5xl font-extrabold tracking-tight text-forest-800 tabular-nums">
-                    {value != null ? Number(value).toLocaleString() : `${percent ?? 0}%`}
-                  </p>
-                  <h2 className="mt-2.5 font-display text-base font-bold text-navy-700">
-                    {label}
-                  </h2>
-                  <p className="mt-1.5 text-[0.8125rem] leading-relaxed text-navy-700/60">
-                    {note}
-                  </p>
-                  <div className="mt-4 h-2 overflow-hidden rounded-full bg-sage-200">
-                    <div
-                      className="h-full rounded-full bg-gradient-to-r from-forest-600 to-leaf-500"
-                      style={{ width: `${Math.min(Number(percent ?? 0), 100)}%` }}
-                    />
-                  </div>
-                </article>
-              );
-            })}
-          </div>
+          <ImpactGrid />
 
           {/* Methodology */}
           <div className="mt-16 grid gap-6 lg:grid-cols-3">

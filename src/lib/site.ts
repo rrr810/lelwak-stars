@@ -338,6 +338,15 @@ export const nav = [
   { href: "/partners", label: "Partner With Us" },
 ] as const;
 
+/**
+ * Prefix for static assets. GitHub Pages serves project sites under a
+ * sub-path (e.g. /lelwak-stars), so every raw <img src> must carry the base
+ * path. next/link and next/image do this automatically; plain strings don't.
+ */
+export const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+export const asset = (path: string) =>
+  `${basePath}${path.startsWith("/") ? path : `/${path}`}`;
+
 export const brandColors = {
   forest: "#14532D",
   leaf: "#22C55E",

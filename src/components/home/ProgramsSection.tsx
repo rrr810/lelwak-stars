@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { programs } from "@/lib/site";
+import { asset, programs } from "@/lib/site";
 import { programIcons, ArrowRightIcon } from "@/components/icons";
 
 export default function ProgramsSection() {
@@ -100,7 +100,7 @@ export default function ProgramsSection() {
                   <div className="relative hidden h-full min-h-[16rem] w-44 overflow-hidden sm:block lg:w-56">
                     {/* TODO: real programme photo */}
                     <img
-                      src={p.image}
+                      src={asset(p.image)}
                       alt=""
                       loading="lazy"
                       decoding="async"

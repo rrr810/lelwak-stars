@@ -149,7 +149,7 @@ try {
     check("is_priority auto-flagged (sponsorship)", row.is_priority === true, String(row.is_priority));
     check("honeypot stored null/empty", !row.hp, String(row.hp));
     check("message stored in full", row.message === submission.message, `${row.message?.length} chars`);
-    check("ip_hash present (hashed, not raw)", row.ip_hash === null || /^[a-f0-9]{64}$/.test(row.ip_hash ?? ""), String(row.ip_hash).slice(0, 16));
+    check("ip_hash null or sha256 (never raw)", row.ip_hash === null || /^[a-f0-9]{64}$/.test(row.ip_hash ?? ""), String(row.ip_hash).slice(0, 16));
   }
 
   // ---------- 6. no client errors ----------

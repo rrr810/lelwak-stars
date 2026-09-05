@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { programs } from "@/lib/site";
+import { asset, programs } from "@/lib/site";
 import { ArrowRightIcon, CalendarIcon, PinIcon } from "@/components/icons";
 
 /**
@@ -88,7 +88,7 @@ export default function StoriesPreview() {
                 <div className="relative aspect-[16/10] overflow-hidden">
                   {/* TODO: real activity photos */}
                   <img
-                    src={s.image}
+                    src={asset(s.image)}
                     alt={s.title}
                     loading="lazy"
                     decoding="async"

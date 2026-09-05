@@ -5,13 +5,14 @@
   "scripts": {
     "dev": "next dev -H 0.0.0.0 -p 3000",
     "build": "next build",
-    "start": "next start -H 0.0.0.0 -p 3000",
+    "start": "serve out -l 3000 -n",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
     "photos": "node scripts/process-photos.mjs",
     "db:migrate": "supabase db push",
     "db:types": "supabase gen types typescript --linked --schema public > src/lib/database.types.ts",
-    "e2e:form": "node scripts/e2e-form.mjs"
+    "e2e:form": "node scripts/e2e-form.mjs",
+    "build:pages": "NEXT_PUBLIC_BASE_PATH=/lelwak-stars NEXT_PUBLIC_SITE_URL=https://rrr810.github.io/lelwak-stars next build"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.6",
@@ -30,6 +31,7 @@
     "eslint": "^9",
     "eslint-config-next": "16.3.4",
     "playwright": "^1.63.0",
+    "serve": "^14.2.6",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

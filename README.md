@@ -223,14 +223,32 @@ Marked `TODO` throughout `src/lib/site.ts`:
 
 ## Deployment
 
-Vercel is the natural home for a Next.js app — free tier, automatic preview
-deploys per pull request, and edge caching for the photo-heavy pages.
+### GitHub Pages (live now)
 
-1. Push this repo to GitHub.
-2. Import it at [vercel.com/new](https://vercel.com/new).
-3. Add the environment variables from `.env.example`.
-4. Set `NEXT_PUBLIC_SITE_URL` to the production domain.
-5. Deploy.
+Every push to `main` triggers `.github/workflows/deploy-pages.yml`, which
+builds a fully static export (`output: "export"`) and publishes it to
 
-For a `.org`/`.ke` domain, point an `A` record at Vercel or use their
-nameservers — they handle TLS automatically.
+    https://rrr810.github.io/lelwak-stars/
+
+The workflow carries only the **public** Supabase URL and anon key — safe by
+design. The service-role key is never in the repo or the workflow.
+
+Because project sites live under a sub-path, the build sets
+`NEXT_PUBLIC_BASE_PATH=/lelwak-stars`; `asset()` in `src/lib/site.ts` prefixes
+raw `<img src>` values so images resolve there. Locally, run plain
+`npm run dev` with no base path.
+
+Static export has no server, so the enquiry form submits from the browser
+through the anon key. That is safe because the database is the authority:
+column grants limit what anon may write, the honeypot `WITH CHECK` rejects
+filled traps, and the BEFORE INSERT trigger pins `status` and derives
+`is_priority`.
+
+### Vercel (optional, later)
+
+For the staff admin dashboard — which needs real server code — import the same
+repo at [vercel.com/new](https://vercel.com/new), add the variables from
+`.env.example`, and deploy with `NEXT_PUBLIC_BASE_PATH` left empty. Pull
+requests get their own preview URLs automatically.
+
+

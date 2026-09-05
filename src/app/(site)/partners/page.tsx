@@ -1,7 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { partnershipTiers, programs } from "@/lib/site";
-import { getPartners } from "@/lib/gallery";
+import PartnersList from "@/components/data/PartnersList";
 import { ArrowRightIcon, CheckIcon, HeartHandIcon } from "@/components/icons";
 
 export const metadata: Metadata = {
@@ -10,7 +10,6 @@ export const metadata: Metadata = {
     "Partner with Lelwak Stars CBO: sponsor tree nurseries, agripreneurship cohorts, school mentorship programmes and community environmental campaigns.",
 };
 
-export const revalidate = 300;
 
 const sponsorableItems = [
   {
@@ -46,8 +45,6 @@ const sponsorableItems = [
 ];
 
 export default async function PartnersPage() {
-  const partners = await getPartners();
-
   return (
     <div className="pt-[7.5rem]">
       <header className="grain relative overflow-hidden bg-forest-900 py-20 text-cream-200 md:py-28">
@@ -219,36 +216,7 @@ export default async function PartnersPage() {
             <h2 className="mt-4 font-display text-h2">Partners & supporters</h2>
           </div>
 
-          {partners.length > 0 ? (
-            <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-              {partners.map((p) => (
-                <li key={p.id} className="card p-6 text-center" data-reveal>
-                  <p className="font-display text-base font-bold text-forest-800">{p.name}</p>
-                  {p.contribution && (
-                    <p className="mt-2 text-[0.75rem] leading-relaxed text-navy-700/60">
-                      {p.contribution}
-                    </p>
-                  )}
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <div className="mt-10 rounded-[1.75rem] border border-dashed border-forest-300 bg-cream-50 p-10 text-center" data-reveal>
-              <p className="font-display text-lg font-bold text-forest-800">
-                Local administration, schools and community stakeholders
-              </p>
-              <p className="mx-auto mt-3 max-w-xl text-[0.875rem] leading-relaxed text-navy-700/65">
-                We work alongside the chief&apos;s office, local schools and
-                community groups. Named institutional partners and their logos
-                will be listed here as those relationships are formalised —
-                including yours.
-              </p>
-              <Link href="/partner-with-us" className="btn btn-forest mt-6">
-                Be our next named partner
-                <ArrowRightIcon />
-              </Link>
-            </div>
-          )}
+          <PartnersList />
         </div>
       </section>
     </div>

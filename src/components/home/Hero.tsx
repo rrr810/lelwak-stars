@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { site } from "@/lib/site";
+import { asset, site } from "@/lib/site";
 import { ArrowRightIcon } from "@/components/icons";
 
 export default function Hero() {
@@ -9,7 +9,7 @@ export default function Hero() {
       <div className="absolute inset-0 -z-10">
         {/* TODO: replace with a real Lelwak Stars field photo */}
         <img
-          src="/images/placeholder-hero.jpg"
+          src={asset("/images/placeholder-hero.jpg")}
           alt="Lelwak Stars youth members raising tree seedlings at a community nursery"
           className="h-full w-full object-cover object-center"
           fetchPriority="high"
