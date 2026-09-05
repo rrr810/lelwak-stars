@@ -191,6 +191,6 @@ as locally rooted. Either works — point the DNS at Vercel and TLS is automatic
 | Database schema | ✅ written, awaiting a project to run against |
 | Enquiry capture | ✅ written, awaiting Supabase to store into |
 | Photo pipeline | ✅ written, awaiting your ZIP |
-| GitHub push | ⏳ blocked on credentials/integration |
-| Live deploy | ⏳ blocked on GitHub |
+| GitHub push | ✅ done — https://github.com/rrr810/lelwak-stars |
+| Live deploy | ⏳ ready — import the repo at vercel.com/new |
 | Admin dashboard | ⏳ next build phase — staff login, content editing, enquiry inbox |
