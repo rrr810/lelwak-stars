@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { asset, site } from "@/lib/site";
+import { livePhotos, site } from "@/lib/site";
 import { ArrowRightIcon } from "@/components/icons";
 
 export default function Hero() {
@@ -7,10 +7,10 @@ export default function Hero() {
     <section className="grain relative isolate flex min-h-[100svh] items-end overflow-hidden bg-forest-950">
       {/* Background image */}
       <div className="absolute inset-0 -z-10">
-        {/* TODO: replace with a real Lelwak Stars field photo */}
+        {/* Real field photo: Simbi Primary planting day, batch 1 */}
         <img
-          src={asset("/images/placeholder-hero.jpg")}
-          alt="Lelwak Stars youth members raising tree seedlings at a community nursery"
+          src={livePhotos.heroSeedlingHolders}
+          alt="Learners in orange uniforms hold tree seedlings on planting day at Simbi Primary School"
           className="h-full w-full object-cover object-center"
           fetchPriority="high"
           decoding="async"

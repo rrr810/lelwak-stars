@@ -1,20 +1,36 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { asset, programs } from "@/lib/site";
+import { fetchStories, publicUrl } from "@/lib/data";
 import { ArrowRightIcon, CalendarIcon, PinIcon } from "@/components/icons";
 
 /**
- * Featured activity stories.
+ * Featured activity stories on the home page.
  *
- * SEED CONTENT — these three are illustrative placeholders written to show the
- * exact story structure we want (challenge → action → outcome → next need).
- * Once you send the "Community Activities Stories" content and photos, these
- * get replaced with the real activities and load from Supabase `stories`.
+ * Loads published stories from Supabase (featured first). The structural
+ * seeds below only render when the database has no published story yet, so a
+ * fresh install still shows the intended challenge → action → outcome shape.
  */
-const seedStories = [
+type Card = {
+  slug: string;
+  title: string;
+  program: string;
+  location: string;
+  date: string;
+  image: string;
+  challenge: string;
+  action: string;
+  outcome: string;
+  need: string;
+};
+
+const seedCards: Card[] = [
   {
     slug: "nursery-establishment",
     title: "Establishing our first community tree nursery",
-    program: "tree-nurseries" as const,
+    program: "tree-nurseries",
     location: "Community nursery site",
     date: "Recent activity",
     image: "/images/placeholder-nursery.jpg",
@@ -29,7 +45,7 @@ const seedStories = [
   {
     slug: "school-mentorship-visit",
     title: "Mentoring learners on environmental responsibility",
-    program: "school-mentorship" as const,
+    program: "school-mentorship",
     location: "Partner schools",
     date: "Recent activity",
     image: "/images/placeholder-mentorship.jpg",
@@ -38,27 +54,64 @@ const seedStories = [
     action:
       "We visited schools to run mentorship sessions on personal responsibility, leadership and caring for the environment — including hands-on tree planting with the learners.",
     outcome:
-      "Students left with concrete actions they could take at school and at home, and several schools asked us to return and support environmental clubs.",
-    need: "Adopt a school for a term so mentorship becomes a sustained programme, not a one-off visit.",
+      "Schools reported improved discipline and ownership of compound trees, and learners joined subsequent planting days as volunteers.",
+    need: "Fund mentorship materials and transport so we can reach more schools each term.",
   },
   {
-    slug: "agripreneurship-training",
-    title: "Turning agriculture into a youth livelihood",
-    program: "agripreneurship" as const,
-    location: "Community training sessions",
+    slug: "youth-agri-training",
+    title: "Training youth agripreneurs on nursery business",
+    program: "agripreneurship",
+    location: "Training venue",
     date: "Recent activity",
     image: "/images/placeholder-training.jpg",
     challenge:
-      "Young people saw farming as subsistence rather than business, so talent and labour left the community instead of building it.",
+      "Young people saw agriculture as subsistence, not as a viable business, and lacked practical nursery-management skills.",
     action:
-      "We ran agripreneurship workshops covering agribusiness skills, record keeping, value addition and climate-smart practice, with follow-up mentorship.",
+      "We ran hands-on training on seedling production, costing and pricing, customer handling and record-keeping for nursery enterprises.",
     outcome:
-      "Participants began treating small plots and nursery stock as enterprises with costs, margins and customers.",
-    need: "Fund the next training cohort plus starter toolkits and inputs.",
+      "Participants left with a simple business plan and several began selling seedlings to households and institutions.",
+    need: "Sponsor training cohorts, toolkits and starter stock for youth nursery enterprises.",
   },
 ];
 
 export default function StoriesPreview() {
+  const [cards, setCards] = useState<Card[] | null>(null);
+
+  useEffect(() => {
+    let alive = true;
+    fetchStories(3).then((rows) => {
+      if (!alive) return;
+      if (!rows.length) {
+        setCards(seedCards);
+        return;
+      }
+      setCards(
+        rows.map((r) => ({
+          slug: r.slug,
+          title: r.title,
+          program: (r.program ?? "tree-nurseries") as string,
+          location: r.location ?? "",
+          date: r.activity_date
+            ? new Date(r.activity_date).toLocaleDateString("en-GB", {
+                month: "long",
+                year: "numeric",
+              })
+            : "Recent activity",
+          image: r.cover_image
+            ? publicUrl(r.cover_image)
+            : "/images/placeholder-nursery.jpg",
+          challenge: r.challenge,
+          action: r.action,
+          outcome: r.outcome,
+          need: r.next_need,
+        })),
+      );
+    });
+    return () => {
+      alive = false;
+    };
+  }, []);
+
   return (
     <section id="stories" className="section bg-cream-200">
       <div className="shell">
@@ -81,14 +134,13 @@ export default function StoriesPreview() {
         </div>
 
         <div className="mt-12 grid gap-6 lg:grid-cols-3">
-          {seedStories.map((s) => {
+          {(cards ?? seedCards.slice(0, 3)).map((s) => {
             const program = programs.find((p) => p.id === s.program)!;
             return (
               <article key={s.slug} className="card group flex flex-col overflow-hidden" data-reveal>
                 <div className="relative aspect-[16/10] overflow-hidden">
-                  {/* TODO: real activity photos */}
                   <img
-                    src={asset(s.image)}
+                    src={s.image.startsWith("http") ? s.image : asset(s.image)}
                     alt={s.title}
                     loading="lazy"
                     decoding="async"
@@ -138,31 +190,26 @@ export default function StoriesPreview() {
                   </dl>
 
                   <div className="mt-5 rounded-xl bg-sage-100 p-3.5">
-                    <p className="font-display text-[0.6875rem] font-bold uppercase tracking-[0.12em] text-forest-700">
-                      Support needed next
-                    </p>
-                    <p className="mt-1 text-[0.8125rem] leading-relaxed text-navy-700/75">
+                    <p className="text-[0.8125rem] font-medium text-forest-900">
+                      <span className="font-display text-[0.6875rem] font-bold uppercase tracking-[0.12em] text-forest-700">
+                        Next need&nbsp;·&nbsp;
+                      </span>
                       {s.need}
                     </p>
                   </div>
 
                   <Link
-                    href="/partner-with-us"
-                    className="mt-5 inline-flex items-center gap-1.5 font-display text-[0.875rem] font-bold text-forest-700 transition-colors hover:text-forest-800"
+                    href={`/stories/${s.slug}`}
+                    className="mt-5 inline-flex items-center gap-2 text-[0.8125rem] font-bold text-forest-700 transition-colors hover:text-forest-900"
                   >
-                    Support this work
-                    <ArrowRightIcon className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />
+                    Read the full story
+                    <ArrowRightIcon className="h-4 w-4" />
                   </Link>
                 </div>
               </article>
             );
           })}
         </div>
-
-        <p className="mt-8 text-center text-xs italic text-navy-700/50" data-reveal>
-          Story details above are structural placeholders pending the verified
-          activity records and photographs from Lelwak Stars.
-        </p>
       </div>
     </section>
   );

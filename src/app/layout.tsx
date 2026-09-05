@@ -105,7 +105,7 @@ export default function RootLayout({
         />
         {children}
         <Script id="reveal-on-scroll" strategy="afterInteractive">
-          {`(function(){var els=document.querySelectorAll('[data-reveal]');if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('is-visible')});return}var io=new IntersectionObserver(function(entries){entries.forEach(function(en){if(en.isIntersecting){en.target.classList.add('is-visible');io.unobserve(en.target)}})},{threshold:0.12,rootMargin:'0px 0px -8% 0px'});els.forEach(function(e,i){e.style.transitionDelay=(Math.min(i,6)*70)+'ms';io.observe(e)})})();`}
+          {`(function(){var els=document.querySelectorAll('[data-reveal]');if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('is-visible')});return}var io=new IntersectionObserver(function(entries){entries.forEach(function(en){if(en.isIntersecting){en.target.classList.add('is-visible');io.unobserve(en.target)}})},{threshold:0.12,rootMargin:'0px 0px -8% 0px'});els.forEach(function(e,i){e.style.transitionDelay=(Math.min(i,6)*70)+'ms';io.observe(e)});var watch=function(n){if(n.nodeType!==1||n.classList.contains('is-visible'))return;n.style.transitionDelay='0ms';io.observe(n)};var mo=new MutationObserver(function(muts){muts.forEach(function(m){m.addedNodes.forEach(function(n){if(n.nodeType!==1)return;if(n.hasAttribute&&n.hasAttribute('data-reveal'))watch(n);if(n.querySelectorAll)n.querySelectorAll('[data-reveal]').forEach(watch);});});});mo.observe(document.body,{childList:true,subtree:true});})();`}
         </Script>
       </body>
     </html>

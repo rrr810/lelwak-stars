@@ -100,7 +100,7 @@ export default function ProgramsSection() {
                   <div className="relative hidden h-full min-h-[16rem] w-44 overflow-hidden sm:block lg:w-56">
                     {/* TODO: real programme photo */}
                     <img
-                      src={asset(p.image)}
+                      src={p.image.startsWith("http") ? p.image : asset(p.image)}
                       alt=""
                       loading="lazy"
                       decoding="async"

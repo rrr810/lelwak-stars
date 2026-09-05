@@ -15,8 +15,8 @@ const pages = [
   { path: "/programs", name: "programs", full: true },
   { path: "/partners", name: "partners", full: true },
   { path: "/partner-with-us", name: "partner-with-us", full: true },
-  { path: "/gallery", name: "gallery", full: false },
-  { path: "/impact", name: "impact", full: false },
+  { path: "/gallery", name: "gallery", full: true },
+  { path: "/impact", name: "impact", full: true },
 ];
 
 const browser = await chromium.launch();
@@ -36,15 +36,30 @@ for (const p of pages) {
         let y = 0;
         const step = () => {
           y += 700;
-          window.scrollTo(0, y);
-          if (y < document.body.scrollHeight) setTimeout(step, 60);
+          // instant: the site uses CSS smooth scrolling, and smooth scrollTo
+          // calls retargeted every 60ms never actually reach the bottom,
+          // leaving reveal-on-scroll sections invisible in captures.
+          window.scrollTo({ top: y, behavior: "instant" });
+          if (y < document.body.scrollHeight) setTimeout(step, 90);
           else {
-            window.scrollTo(0, 0);
-            setTimeout(res, 400);
+            window.scrollTo({ top: 0, behavior: "instant" });
+            setTimeout(res, 500);
           }
         };
         step();
       });
+      // let lazy-loaded images finish decoding before we scroll back up
+      await Promise.all(
+        Array.from(document.images).map(
+          (img) =>
+            new Promise((r) => {
+              if (img.complete && img.naturalWidth > 0) return r(1);
+              const t = setTimeout(r, 5000); // never hang on empty/dead srcs
+              img.addEventListener("load", () => { clearTimeout(t); r(1); });
+              img.addEventListener("error", () => { clearTimeout(t); r(1); });
+            }),
+        ),
+      );
     });
     await page.waitForTimeout(600);
   }

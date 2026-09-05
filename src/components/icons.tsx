@@ -101,6 +101,24 @@ export function ArrowRightIcon({ className = "h-4 w-4", strokeWidth = 2 }: IconP
   );
 }
 
+export function ArrowLeftIcon({ className = "h-4 w-4", strokeWidth = 2 }: IconProps) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={strokeWidth}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={`${base} ${className}`}
+      aria-hidden="true"
+    >
+      <path d="M19 12H5" />
+      <path d="m12 19-7-7 7-7" />
+    </svg>
+  );
+}
+
 export function HeartHandIcon({ className = "h-6 w-6", strokeWidth = 1.75 }: IconProps) {
   return (
     <svg

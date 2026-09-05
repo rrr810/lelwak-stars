@@ -17,7 +17,7 @@ export function configured() {
 
 const BUCKET = process.env.NEXT_PUBLIC_SUPABASE_STORAGE_BUCKET ?? "gallery";
 
-function publicUrl(path: string) {
+export function publicUrl(path: string) {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL!;
   return `${url}/storage/v1/object/public/${BUCKET}/${path.replace(/^\//, "")}`;
 }
@@ -109,6 +109,45 @@ export async function fetchPartners() {
       .order("sort_order");
     if (error || !data) return [];
     return data;
+  } catch {
+    return [];
+  }
+}
+
+/** One published story by slug (build-time on static exports). */
+export async function fetchStory(slug: string) {
+  if (!configured()) return null;
+  try {
+    const { data, error } = await createClient()
+      .from("stories")
+      .select("*")
+      .eq("slug", slug)
+      .eq("is_published", true)
+      .maybeSingle();
+    if (error || !data) return null;
+    return data;
+  } catch {
+    return null;
+  }
+}
+
+/** Published gallery photos attached to a story, in curator order. */
+export async function fetchStoryPhotos(storyId: string) {
+  if (!configured()) return [];
+  try {
+    const { data, error } = await createClient()
+      .from("gallery")
+      .select("*")
+      .eq("story_id", storyId)
+      .eq("is_published", true)
+      .order("sort_order")
+      .order("created_at");
+    if (error || !data) return [];
+    return data.map((row) => ({
+      ...row,
+      src: publicUrl(row.path_full),
+      thumb: publicUrl(row.path_thumb),
+    }));
   } catch {
     return [];
   }

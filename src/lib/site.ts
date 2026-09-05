@@ -89,6 +89,27 @@ export type Program = {
   partnerAsk: string;
 };
 
+/**
+ * Real field photos, hosted in the public Supabase "gallery" bucket.
+ * Added per published batch by scripts/publish-photos.mjs; placeholders in
+ * this file stay only until a matching real photo exists.
+ */
+export const photoBase =
+  "https://ncarkchmduwihzoadyiv.supabase.co/storage/v1/object/public/gallery/";
+
+export const livePhotos = {
+  /** Simbi Primary planting day — learners holding seedlings (batch 1). */
+  heroSeedlingHolders: photoBase + "webp/simbi-seedling-holders-9ccacfe2-1600.webp",
+  /** Facilitator addressing learners at Simbi Primary (batch 1). */
+  mentorshipTalk: photoBase + "webp/simbi-mentorship-talk-b4c493a0-1600.webp",
+  /** Learner firming soil around a fresh seedling, Simbi Primary (batch 1). */
+  learnerPlanting: photoBase + "webp/simbi-learner-planting-6d69a058-1600.webp",
+  /** Dignity kits going up in celebration, Simbi Primary (batch 1). */
+  dignityKits: photoBase + "webp/simbi-dignity-kits-bcba3121-1600.webp",
+  /** Wide shot of the dignity-drive celebration (batch 1). */
+  dignityCelebration: photoBase + "webp/simbi-dignity-celebration-40f994bb-1600.webp",
+} as const;
+
 export const programs: Program[] = [
   {
     id: "tree-nurseries",
@@ -105,7 +126,7 @@ export const programs: Program[] = [
     accent: "#14532D",
     accentSoft: "#DDEDDD",
     icon: "leaf",
-    image: "/images/placeholder-nursery.jpg",
+    image: livePhotos.learnerPlanting,
     partnerAsk:
       "Sponsor a nursery bed, polythene seedling bags, shade netting, watering equipment or a planting campaign.",
   },
@@ -143,7 +164,7 @@ export const programs: Program[] = [
     accent: "#123047",
     accentSoft: "#DCE7EF",
     icon: "book",
-    image: "/images/placeholder-mentorship.jpg",
+    image: livePhotos.mentorshipTalk,
     partnerAsk:
       "Adopt a school for a term, sponsor mentorship materials, or send your staff as guest mentors.",
   },

@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { fetchStories } from "@/lib/data";
+import { fetchStories, publicUrl } from "@/lib/data";
 import { seedStories, type SeedStory } from "@/lib/seed";
 import { programs } from "@/lib/site";
 import { asset } from "@/lib/site";
@@ -31,7 +31,7 @@ export default function StoriesList() {
                   year: "numeric",
                 })
               : "",
-            image: r.cover_image ?? "/images/placeholder-nursery.jpg",
+            image: r.cover_image ? publicUrl(r.cover_image) : "/images/placeholder-nursery.jpg",
             excerpt: r.excerpt,
             challenge: r.challenge,
             action: r.action,
