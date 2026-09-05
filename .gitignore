@@ -1,0 +1,58 @@
+# dependencies
+/node_modules
+/.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+
+# testing
+/coverage
+
+# next.js
+/.next/
+/out/
+next-env.d.ts
+
+# production
+/build
+
+# misc
+.DS_Store
+*.pem
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# env files — NEVER commit real keys
+.env
+.env.local
+.env*.local
+.env.production
+.env.development
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+
+# ---- photo pipeline working files (large binaries, regenerated locally) ----
+# Originals and processed renditions are uploaded to Supabase Storage, not git.
+/photos-inbox
+/out/gallery
+/out/originals
+.unzipped-*
+
+# small, safe to commit so the pipeline is reviewable:
+!/out/manifest.json
+!/out/insert-gallery.sql
+
+# supabase local dev
+/supabase/.temp
+/supabase/.branches
