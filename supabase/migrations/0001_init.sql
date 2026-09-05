@@ -433,15 +433,16 @@ create policy "staff manage gallery files" on storage.objects
 
 -- ----------------------------------------------------------------------------
 -- 8. IMAGE URL HELPER
+--
+-- Note: older Supabase versions exposed `storage.buckets.public_url`. Current
+-- versions do not. The public object path convention below is stable across
+-- versions, and the Next.js app prefixes it with the project URL from
+-- NEXT_PUBLIC_SUPABASE_URL (see src/lib/gallery.ts -> publicUrl()).
 -- ----------------------------------------------------------------------------
 create or replace function public.gallery_url(g public.gallery, kind text default 'full')
 returns text language sql stable as $$
-  select case
-    when kind = 'thumb' then
-      (select public_url from storage.buckets where id = 'gallery') || '/' || g.path_thumb
-    else
-      (select public_url from storage.buckets where id = 'gallery') || '/' || g.path_full
-  end;
+  select '/storage/v1/object/public/gallery/' ||
+    case when kind = 'thumb' then g.path_thumb else g.path_full end;
 $$;
 
 -- ----------------------------------------------------------------------------

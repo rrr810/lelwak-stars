@@ -108,9 +108,9 @@ export async function submitInquiry(
     message: message.slice(0, MAX_MESSAGE),
     user_agent: ua.slice(0, 300),
     ip_hash: ipHash,
-    // Sponsorship / grant enquiries get flagged so the team responds first.
-    // Sponsorship / grant enquiries are flagged so the team responds first.
-    is_priority: inquiryType === "sponsorship" || inquiryType === "grant",
+    // NOTE: is_priority is NOT sent. Migration 0005 derives it in a BEFORE
+    // INSERT trigger from inquiry_type, so no caller — not even this code —
+    // can forge an enquiry's place in the pipeline.
   } as Database["public"]["Tables"]["inquiries"]["Insert"]);
 
   if (error) {

@@ -10,7 +10,8 @@
     "typecheck": "tsc --noEmit",
     "photos": "node scripts/process-photos.mjs",
     "db:migrate": "supabase db push",
-    "db:types": "supabase gen types typescript --linked --schema public > src/lib/database.types.ts"
+    "db:types": "supabase gen types typescript --linked --schema public > src/lib/database.types.ts",
+    "e2e:form": "node scripts/e2e-form.mjs"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.6",
@@ -28,6 +29,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.3.4",
+    "playwright": "^1.63.0",
     "tailwindcss": "^4",
     "typescript": "^5"
   }
