@@ -114,6 +114,10 @@ export const livePhotos = {
   agriWorkshopFlipcharts: photoBase + "webp/agri-training-flipcharts-ec7bd32c-1600.webp",
   /** Facilitators in branded Lelwak Stars vests (batch 4). */
   facilitatorsVests: photoBase + "webp/lelwak-facilitators-vests-1f5ba1ce-1600.webp",
+  /** Nursery species rows in gold and green (batch 5). */
+  nurserySpeciesRows: photoBase + "webp/nursery-species-rows-d3110679-1600.webp",
+  /** Tea seedling tunnel under bamboo arches (batch 5). */
+  nurseryTeaTunnel: photoBase + "webp/nursery-tea-tunnel-e9a104c3-1600.webp",
 } as const;
 
 export const programs: Program[] = [
@@ -132,7 +136,7 @@ export const programs: Program[] = [
     accent: "#14532D",
     accentSoft: "#DDEDDD",
     icon: "leaf",
-    image: livePhotos.learnerPlanting,
+    image: livePhotos.nurserySpeciesRows,
     partnerAsk:
       "Sponsor a nursery bed, polythene seedling bags, shade netting, watering equipment or a planting campaign.",
   },
