@@ -93,14 +93,16 @@ const slugify = (s) =>
     .replace(/^-+|-+$/g, "")
     .slice(0, 60) || "photo";
 
-async function* walk(dir) {
+async function* walk(dir, root = dir) {
   for (const entry of await fs.readdir(dir, { withFileTypes: true })) {
     const full = path.join(dir, entry.name);
     if (entry.isDirectory()) {
       if (/^(out|node_modules|\.git|__MACOSX|\.DS_Store)$/i.test(entry.name)) continue;
-      yield* walk(full);
+      yield* walk(full, root);
     } else if (entry.isFile() && IMAGE_EXT.test(entry.name) && !entry.name.startsWith(".")) {
-      yield { full, rel: path.relative(dir, full) };
+      // rel must be relative to the ROOT of the batch, otherwise folder
+      // names (which drive auto-categorisation) are lost for nested files.
+      yield { full, rel: path.relative(root, full) };
     }
   }
 }
