@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { mission, site, vision, framework } from "@/lib/site";
+import { livePhotos, mission, site, vision, framework } from "@/lib/site";
 import { ArrowRightIcon, CheckIcon } from "@/components/icons";
 
 export const metadata: Metadata = {
@@ -175,6 +175,51 @@ export default function AboutPage() {
             <Link href="/partner-with-us" className="btn btn-ghost">
               Partner with us
             </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ------------------------------------------------------- the team */}
+      <section className="section bg-cream-200">
+        <div className="shell grid items-center gap-12 lg:grid-cols-2">
+          <div data-reveal>
+            <span className="eyebrow">The team</span>
+            <h2 className="mt-4 font-display text-h2">
+              The people behind the trees.
+            </h2>
+            <p className="mt-5 text-lead text-navy-700/75">
+              Lelwak Stars is run by young people from the community we serve —
+              volunteers, students, young farmers and early-career
+              professionals who give their weekends to nursery beds, school
+              visits and training sessions.
+            </p>
+            <p className="mt-4 text-lead text-navy-700/75">
+              We wear the same vests, keep the same records and answer to the
+              same people: the chief&apos;s office, the school heads and the
+              households we work with. Small by design, accountable by habit —
+              and always recruiting.
+            </p>
+            <Link href="/partner-with-us" className="btn btn-ghost mt-8">
+              Work with this team
+              <ArrowRightIcon />
+            </Link>
+          </div>
+          <div className="grid grid-cols-2 gap-4" data-reveal>
+            {[
+              [livePhotos.teamLineup, "The Lelwak Stars team in one line"],
+              [livePhotos.teamChiefOffice, "The team with local leadership at the Lelwak Chief's office"],
+              [livePhotos.teamSpeaker, "A team member addressing a school assembly"],
+              [livePhotos.teamClassroom, "The team joining a classroom mentorship visit"],
+            ].map(([src, alt]) => (
+              <img
+                key={src}
+                src={src}
+                alt={alt}
+                loading="lazy"
+                decoding="async"
+                className="aspect-square w-full rounded-2xl object-cover shadow-soft"
+              />
+            ))}
           </div>
         </div>
       </section>

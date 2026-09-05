@@ -118,6 +118,14 @@ export const livePhotos = {
   nurserySpeciesRows: photoBase + "webp/nursery-species-rows-d3110679-1600.webp",
   /** Tea seedling tunnel under bamboo arches (batch 5). */
   nurseryTeaTunnel: photoBase + "webp/nursery-tea-tunnel-e9a104c3-1600.webp",
+  /** Team lineup outside a partner's house (batch 6). */
+  teamLineup: photoBase + "webp/team-lineup-22acb455-1600.webp",
+  /** Team with local leadership at the Lelwak Chief's office (batch 6). */
+  teamChiefOffice: photoBase + "webp/team-chief-office-682bf4c0-1600.webp",
+  /** Team member addressing a school assembly (batch 6). */
+  teamSpeaker: photoBase + "webp/team-assembly-speaker-220fbba1-1600.webp",
+  /** Team joining a classroom mentorship visit (batch 6). */
+  teamClassroom: photoBase + "webp/team-classroom-visit-2384fc4b-1600.webp",
 } as const;
 
 export const programs: Program[] = [

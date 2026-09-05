@@ -51,7 +51,7 @@ export default function ProgramsPage() {
                     <div className="aspect-[4/3]">
                       {/* TODO: real programme photograph */}
                       <img
-                        src={asset(p.image)}
+                        src={p.image.startsWith("http") ? p.image : asset(p.image)}
                         alt={p.name}
                         loading="lazy"
                         decoding="async"
