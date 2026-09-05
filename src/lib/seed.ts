@@ -29,7 +29,7 @@ export const seedStories: SeedStory[] = [
     program: "tree-nurseries",
     location: "Community nursery site",
     date: "Recent activity",
-    image: "/images/placeholder-nursery.jpg",
+    image: "",
     excerpt:
       "How we turned a patch of degraded land into a working seedling nursery managed by young people from the community.",
     challenge:
@@ -47,7 +47,7 @@ export const seedStories: SeedStory[] = [
     program: "school-mentorship",
     location: "Partner schools",
     date: "Recent activity",
-    image: "/images/placeholder-mentorship.jpg",
+    image: "",
     excerpt:
       "A term of school visits bringing practical environmental stewardship, discipline and leadership coaching to learners.",
     challenge:
@@ -65,7 +65,7 @@ export const seedStories: SeedStory[] = [
     program: "agripreneurship",
     location: "Community training sessions",
     date: "Recent activity",
-    image: "/images/placeholder-training.jpg",
+    image: "",
     excerpt:
       "Agribusiness skills, record keeping and value addition — helping young people see farming as an enterprise.",
     challenge:
@@ -83,7 +83,7 @@ export const seedStories: SeedStory[] = [
     program: "capacity-building",
     location: "Chief's office & community barazas",
     date: "Recent activity",
-    image: "/images/placeholder-planting.jpg",
+    image: "",
     excerpt:
       "Why our activities survive: we plan with the chief's office, elders and households before a single seedling is planted.",
     challenge:

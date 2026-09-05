@@ -33,7 +33,7 @@ const seedCards: Card[] = [
     program: "tree-nurseries",
     location: "Community nursery site",
     date: "Recent activity",
-    image: "/images/placeholder-nursery.jpg",
+    image: "",
     challenge:
       "Degraded land and scarce indigenous seedlings made it hard for households and schools to access affordable trees to plant.",
     action:
@@ -48,7 +48,7 @@ const seedCards: Card[] = [
     program: "school-mentorship",
     location: "Partner schools",
     date: "Recent activity",
-    image: "/images/placeholder-mentorship.jpg",
+    image: "",
     challenge:
       "Learners had little exposure to practical environmental stewardship, discipline and leadership outside the classroom syllabus.",
     action:
@@ -63,7 +63,7 @@ const seedCards: Card[] = [
     program: "agripreneurship",
     location: "Training venue",
     date: "Recent activity",
-    image: "/images/placeholder-training.jpg",
+    image: "",
     challenge:
       "Young people saw agriculture as subsistence, not as a viable business, and lacked practical nursery-management skills.",
     action:
@@ -99,7 +99,7 @@ export default function StoriesPreview() {
             : "Recent activity",
           image: r.cover_image
             ? publicUrl(r.cover_image)
-            : "/images/placeholder-nursery.jpg",
+            : "",
           challenge: r.challenge,
           action: r.action,
           outcome: r.outcome,
@@ -139,6 +139,7 @@ export default function StoriesPreview() {
             return (
               <article key={s.slug} className="card group flex flex-col overflow-hidden" data-reveal>
                 <div className="relative aspect-[16/10] overflow-hidden">
+{s.image ? (
                   <img
                     src={s.image.startsWith("http") ? s.image : asset(s.image)}
                     alt={s.title}
@@ -146,6 +147,9 @@ export default function StoriesPreview() {
                     decoding="async"
                     className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.06]"
                   />
+                ) : (
+                  <div className="h-full w-full bg-gradient-to-br from-forest-700 via-forest-600 to-navy-700" />
+                )}
                   <div className="absolute inset-0 bg-gradient-to-t from-navy-900/70 via-transparent to-transparent" />
                   <span
                     className="absolute left-4 top-4 rounded-full px-3 py-1 text-[0.6875rem] font-bold uppercase tracking-[0.1em] text-white shadow-soft"

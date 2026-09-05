@@ -31,7 +31,7 @@ export default function StoriesList() {
                   year: "numeric",
                 })
               : "",
-            image: r.cover_image ? publicUrl(r.cover_image) : "/images/placeholder-nursery.jpg",
+            image: r.cover_image ? publicUrl(r.cover_image) : "",
             excerpt: r.excerpt,
             challenge: r.challenge,
             action: r.action,
@@ -59,6 +59,7 @@ export default function StoriesList() {
           return (
             <article key={s.slug} className="card group flex flex-col overflow-hidden" data-reveal>
               <div className="relative aspect-[16/9] overflow-hidden">
+{s.image ? (
                 <img
                   src={s.image.startsWith("http") ? s.image : asset(s.image)}
                   alt={s.title}
@@ -66,6 +67,9 @@ export default function StoriesList() {
                   decoding="async"
                   className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.05]"
                 />
+                ) : (
+                  <div className="h-full w-full bg-gradient-to-br from-forest-700 via-forest-600 to-navy-700" />
+                )}
                 <div className="absolute inset-0 bg-gradient-to-t from-navy-900/75 via-transparent to-transparent" />
                 {program && (
                   <span

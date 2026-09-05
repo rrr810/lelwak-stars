@@ -108,6 +108,12 @@ export const livePhotos = {
   dignityKits: photoBase + "webp/simbi-dignity-kits-bcba3121-1600.webp",
   /** Wide shot of the dignity-drive celebration (batch 1). */
   dignityCelebration: photoBase + "webp/simbi-dignity-celebration-40f994bb-1600.webp",
+  /** Many hands holding one seedling, agribusiness training day (batch 4). */
+  handsOneSeedling: photoBase + "webp/hands-one-seedling-2e92765d-1600.webp",
+  /** Agribusiness workshop with flip charts (batch 4). */
+  agriWorkshopFlipcharts: photoBase + "webp/agri-training-flipcharts-ec7bd32c-1600.webp",
+  /** Facilitators in branded Lelwak Stars vests (batch 4). */
+  facilitatorsVests: photoBase + "webp/lelwak-facilitators-vests-1f5ba1ce-1600.webp",
 } as const;
 
 export const programs: Program[] = [
@@ -145,7 +151,7 @@ export const programs: Program[] = [
     accent: "#D89B32",
     accentSoft: "#FBF0DA",
     icon: "sprout",
-    image: "/images/placeholder-training.jpg",
+    image: livePhotos.agriWorkshopFlipcharts,
     partnerAsk:
       "Fund a training cohort, toolkits and inputs, or connect our youth agripreneurs to markets.",
   },
@@ -183,7 +189,7 @@ export const programs: Program[] = [
     accent: "#C2603F",
     accentSoft: "#F7E4DC",
     icon: "users",
-    image: "/images/placeholder-planting.jpg",
+    image: livePhotos.facilitatorsVests,
     partnerAsk:
       "Support facilitator training, venue and materials, or co-design a curriculum with us.",
   },

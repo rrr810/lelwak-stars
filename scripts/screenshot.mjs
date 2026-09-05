@@ -63,8 +63,8 @@ for (const p of pages) {
     });
     await page.waitForTimeout(600);
   }
-  const file = `${OUT}/${p.name}.png`;
-  await page.screenshot({ path: file, fullPage: p.full });
+  const file = `${OUT}/${p.name}.jpg`;
+  await page.screenshot({ path: file, fullPage: p.full, type: "jpeg", quality: 82 });
   const kb = Math.round(fs.statSync(file).size / 1024);
   console.log(`  ${p.path.padEnd(16)} -> ${file}  (${kb} KB)`);
 }
