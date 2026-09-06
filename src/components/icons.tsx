@@ -277,6 +277,14 @@ export const programIcons = {
 } as const;
 
 /** Inline SVG wordmark — swap for a real logo file once provided. */
+export function FacebookIcon({ className = "h-5 w-5" }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" className={`${base} ${className}`} aria-hidden="true" fill="currentColor">
+      <path d="M13.5 21v-7h2.4l.4-3h-2.8V9.1c0-.9.3-1.5 1.6-1.5h1.3V4.9c-.3 0-1.2-.1-2.2-.1-2.2 0-3.7 1.3-3.7 3.8V11H8v3h2.5v7h3Z" />
+    </svg>
+  );
+}
+
 export function Logo({ className = "h-9 w-9" }: IconProps) {
   return (
     // eslint-disable-next-line @next/next/no-img-element

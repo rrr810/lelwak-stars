@@ -18,7 +18,9 @@ type SiteConfig = {
   socials: Record<string, string>;
   registration: {
     number: string;
+    serial: string;
     issuedBy: string;
+    registeredOn: string;
     yearFounded: number;
     bankDetailsAvailable: boolean;
   };
@@ -52,9 +54,11 @@ export const site: SiteConfig = {
     tiktok: "", // TODO
   },
   registration: {
-    number: "DSS/NH/CBO/015/23", // certificate serial CBO 06771
+    number: "DSS/NH/CBO/015/23",
+    serial: "CBO 06771",
     issuedBy: "Directorate of Social Development, Nandi County — Community Groups Registration Act No. 30 of 2022",
-    yearFounded: 2023, // registered 14 August 2023
+    registeredOn: "2023-08-14",
+    yearFounded: 2023,
     bankDetailsAvailable: true,
   },
 };

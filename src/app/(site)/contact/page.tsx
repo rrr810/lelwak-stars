@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import InquiryForm from "@/components/InquiryForm";
 import { inquiryTypes, site } from "@/lib/site";
-import { MailIcon, PhoneIcon, PinIcon, WhatsAppIcon } from "@/components/icons";
+import { MailIcon, PhoneIcon, PinIcon, WhatsAppIcon , FacebookIcon} from "@/components/icons";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -53,11 +53,19 @@ export default function ContactPage() {
                 live: Boolean(site.contact.whatsapp),
               },
               {
+                icon: <FacebookIcon className="h-5 w-5" />,
+                label: "Facebook",
+                value: "Lelwak Stars CBO",
+                href: site.socials.facebook,
+                note: "Follow field updates and community calls.",
+                live: Boolean(site.socials.facebook),
+              },
+              {
                 icon: <PinIcon className="h-5 w-5" />,
                 label: "Based in",
                 value: site.location.region,
-                note: "County, sub-county, ward and office address to be added.",
-                live: false,
+                note: site.location.addressLine || "Ward and office address to be added.",
+                live: Boolean(site.location.region && site.location.region !== "Kenya"),
               },
             ].map((c) => (
               <div key={c.label} className="card flex gap-4 p-6" data-reveal>

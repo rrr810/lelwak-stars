@@ -87,7 +87,19 @@ export default function AboutPage() {
                   <>
                     Registered CBO No.{" "}
                     <strong>{site.registration.number}</strong>
+                    {site.registration.serial && <> · Serial {site.registration.serial}</>}
                     {site.registration.issuedBy && <> · {site.registration.issuedBy}</>}
+                    {site.registration.registeredOn && (
+                      <>
+                        {" "}· registered{" "}
+                        {new Date(site.registration.registeredOn).toLocaleDateString("en-GB", {
+                          day: "numeric",
+                          month: "long",
+                          year: "numeric",
+                        })}{" "}
+                        · {site.location.region}
+                      </>
+                    )}
                   </>
                 ) : (
                   <>

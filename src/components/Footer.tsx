@@ -7,6 +7,7 @@ import {
   PhoneIcon,
   PinIcon,
   WhatsAppIcon,
+  FacebookIcon,
 } from "@/components/icons";
 
 const year = new Date().getFullYear();
@@ -58,6 +59,20 @@ export default function Footer() {
           <p className="mt-5 max-w-sm text-[0.9375rem] leading-relaxed text-cream-200/70">
             {site.description}
           </p>
+
+          {site.socials.facebook ? (
+            <div className="mt-6 flex gap-3">
+              <a
+                href={site.socials.facebook}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Lelwak Stars CBO on Facebook"
+                className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-white/10 text-cream-100 transition hover:bg-leaf-500 hover:text-forest-950"
+              >
+                <FacebookIcon className="h-5 w-5" />
+              </a>
+            </div>
+          ) : null}
 
           <ul className="mt-6 space-y-2.5 text-[0.875rem]">
             {site.contact.email && (
@@ -188,8 +203,21 @@ export default function Footer() {
 
           {site.registration.number ? (
             <p className="mt-5 rounded-xl bg-white/5 p-3 text-[0.75rem] leading-relaxed text-cream-200/60">
-              Registered CBO · {site.registration.number}
+              Registered CBO No. <strong>{site.registration.number}</strong>
+              {site.registration.serial && <> · Serial {site.registration.serial}</>}
               {site.registration.issuedBy && <><br />{site.registration.issuedBy}</>}
+              {site.registration.registeredOn && (
+                <>
+                  <br />
+                  Registered{" "}
+                  {new Date(site.registration.registeredOn).toLocaleDateString("en-GB", {
+                    day: "numeric",
+                    month: "long",
+                    year: "numeric",
+                  })}{" "}
+                  · {site.location.region}
+                </>
+              )}
             </p>
           ) : (
             <p className="mt-5 rounded-xl border border-dashed border-white/15 p-3 text-[0.75rem] leading-relaxed text-cream-200/45">
