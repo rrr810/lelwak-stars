@@ -58,16 +58,16 @@ export default async function ImpactPage() {
 
           <div className="mt-12 rounded-[1.75rem] border border-dashed border-gold-500/50 bg-gold-500/[0.06] p-7" data-reveal>
             <h3 className="font-display text-h3 !text-gold-700">
-              One thing we want to fix
+              How we report now
             </h3>
             <p className="mt-3 max-w-3xl text-[0.9375rem] leading-relaxed text-navy-700/75">
-              Our portfolio currently reports percentages — 48% seedlings grown,
-              45% youth trained. A percentage without a denominator is hard for a
-              funder to verify. Our next reporting cycle will publish absolute
-              counts and targets instead:{" "}
-              <em>&ldquo;X seedlings raised against a target of Y&rdquo;</em>. That is
-              what makes an impact page credible, and it is what this database
-              schema is already built to hold.
+              Since September 2026 we publish verified absolute counts instead
+              of percentages — a percentage without a denominator is hard for a
+              funder to audit. Every counter above comes straight from our
+              field records: seedlings standing in the nurseries, learners
+              mentored school by school, uniforms handed over, groups trained.
+              Each card carries a <em>&ldquo;verified count&rdquo;</em> mark, and
+              as programmes grow we will publish targets alongside them.
             </p>
             <Link href="/partner-with-us" className="btn btn-forest mt-6">
               Ask for our latest report

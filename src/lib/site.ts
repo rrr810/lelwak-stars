@@ -35,8 +35,8 @@ export const site: SiteConfig = {
 
   // ---- TODO: confirm these with Lelwak Stars ----
   location: {
-    region: "Kenya", // TODO: county / sub-county / ward
-    addressLine: "", // TODO
+    region: "Nandi East Sub-County, Nandi County",
+    addressLine: "Lelwak, Nandi Hills, Nandi East, Nandi County",
   },
   contact: {
     email: "lelwakstarscbo@gmail.com",
@@ -44,7 +44,7 @@ export const site: SiteConfig = {
     whatsapp: "", // TODO: international format e.g. +2547XXXXXXXX
   },
   socials: {
-    facebook: "", // TODO
+    facebook: "https://www.fb.com/l/6lp1kJRRR",
     instagram: "", // TODO
     x: "", // TODO
     linkedin: "", // TODO
@@ -52,9 +52,9 @@ export const site: SiteConfig = {
     tiktok: "", // TODO
   },
   registration: {
-    number: "", // TODO: CBO registration certificate number — sponsors ask for this
-    issuedBy: "", // TODO: e.g. "Ministry of Labour & Social Protection / County Government"
-    yearFounded: 0, // TODO
+    number: "DSS/NH/CBO/015/23", // certificate serial CBO 06771
+    issuedBy: "Directorate of Social Development, Nandi County — Community Groups Registration Act No. 30 of 2022",
+    yearFounded: 2023, // registered 14 August 2023
     bankDetailsAvailable: true,
   },
 };

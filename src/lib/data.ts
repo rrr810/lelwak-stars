@@ -152,3 +152,18 @@ export async function fetchStoryPhotos(storyId: string) {
     return [];
   }
 }
+
+/** Gallery categories, live from the database (self-serve in the dashboard). */
+export async function fetchCategories(): Promise<{ id: string; label: string }[]> {
+  if (!configured()) return [];
+  try {
+    const { data, error } = await createClient()
+      .from("gallery_categories")
+      .select("id,label")
+      .order("sort_order");
+    if (error || !data || data.length === 0) return [];
+    return data as { id: string; label: string }[];
+  } catch {
+    return [];
+  }
+}

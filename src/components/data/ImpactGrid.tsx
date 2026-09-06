@@ -58,12 +58,18 @@ export default function ImpactGrid() {
           </p>
           <h2 className="mt-2.5 font-display text-base font-bold text-navy-700">{s.label}</h2>
           <p className="mt-1.5 text-[0.8125rem] leading-relaxed text-navy-700/60">{s.note}</p>
-          <div className="mt-4 h-2 overflow-hidden rounded-full bg-sage-200">
-            <div
-              className="h-full rounded-full bg-gradient-to-r from-forest-600 to-leaf-500"
-              style={{ width: `${Math.min(Number(s.percent ?? 0), 100)}%` }}
-            />
-          </div>
+          {s.percent != null ? (
+            <div className="mt-4 h-2 overflow-hidden rounded-full bg-sage-200">
+              <div
+                className="h-full rounded-full bg-gradient-to-r from-forest-600 to-leaf-500"
+                style={{ width: `${Math.min(Number(s.percent), 100)}%` }}
+              />
+            </div>
+          ) : (
+            <p className="mt-4 inline-flex items-center gap-1.5 rounded-full bg-sage-100 px-2.5 py-1 text-[0.6875rem] font-bold uppercase tracking-[0.08em] text-forest-700">
+              ✓ verified count
+            </p>
+          )}
         </article>
       ))}
       {rows === null &&

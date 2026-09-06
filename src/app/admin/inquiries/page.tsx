@@ -171,11 +171,25 @@ export default function InquiriesPage() {
             </div>
 
             <div className="flex flex-wrap items-center gap-3 border-t border-navy-700/8 pt-4">
-              <a
-                href={`mailto:${r.email}?subject=${encodeURIComponent(`Re: your message to Lelwak Stars CBO`)}&body=${encodeURIComponent(`Hello ${r.name},\n\nThank you for writing to Lelwak Stars CBO…\n\n`)}`}
+              <button
+                onClick={() => {
+                  const url =
+                    `https://mail.google.com/mail/?view=cm&fs=1` +
+                    `&to=${encodeURIComponent(r.email)}` +
+                    `&su=${encodeURIComponent("Re: your message to Lelwak Stars CBO")}` +
+                    `&body=${encodeURIComponent(`Hello ${r.name},\n\nThank you for writing to Lelwak Stars CBO…\n\n`)}`;
+                  window.open(url, "_blank", "noopener");
+                }}
                 className="rounded-xl bg-forest-700 px-4 py-2 text-[0.8125rem] font-bold text-white transition hover:bg-forest-800"
               >
                 ✉ Reply to {r.email.split("@")[0]}
+              </button>
+              <a
+                href={`mailto:${r.email}?subject=${encodeURIComponent("Re: your message to Lelwak Stars CBO")}`}
+                className="text-[0.75rem] font-bold text-navy-700/50 underline-offset-2 hover:text-forest-700 hover:underline"
+                title="Open in a different mail app"
+              >
+                other mail app
               </a>
               <span className="text-[0.75rem] font-bold uppercase tracking-wide text-navy-700/45">Move to:</span>
               {(["new", "contacted", "in-discussion", "won", "lost"] as const).map((st) => (

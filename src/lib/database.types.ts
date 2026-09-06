@@ -7,13 +7,7 @@
  *     > src/lib/database.types.ts
  */
 
-export type GalleryCategory =
-  | "tree-nurseries"
-  | "tree-planting"
-  | "school-mentorship"
-  | "youth-training"
-  | "community-engagement"
-  | "partnerships";
+export type GalleryCategory = string; // was an enum; 0009 moved categories to a table
 
 export type ProgramId =
   | "tree-nurseries"
@@ -45,6 +39,12 @@ type Json = string | number | boolean | null | Json[] | { [key: string]: Json };
 export type Database = {
   public: {
     Tables: {
+      gallery_categories: {
+        Row: { id: string; label: string; sort_order: number; created_at: string };
+        Insert: { id: string; label: string; sort_order?: number; created_at?: string };
+        Update: { id?: string; label?: string; sort_order?: number; created_at?: string };
+        Relationships: [];
+      };
       page_views: {
         Row: {
           id: string;

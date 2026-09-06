@@ -32,7 +32,7 @@ export default function GalleryBody() {
       <>
         <p className="text-sm font-medium text-navy-700/60">
           {images.length} photograph{images.length === 1 ? "" : "s"} ·{" "}
-          {galleryCategories.length} collections
+          {new Set(images.map((i) => i.category)).size} collections
         </p>
         <div className="mt-6">
           <GalleryGrid images={images} columns={4} />

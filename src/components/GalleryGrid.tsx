@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { galleryCategories } from "@/lib/site";
+import { fetchCategories } from "@/lib/data";
 import { ArrowRightIcon, CloseIcon } from "@/components/icons";
 
 export type GalleryImage = {
@@ -10,7 +11,7 @@ export type GalleryImage = {
   thumb: string;
   alt: string;
   caption: string;
-  category: (typeof galleryCategories)[number]["id"];
+  category: string;
   location?: string;
   date?: string;
   /** 1-10, controls the masonry row span */
@@ -37,6 +38,17 @@ export default function GalleryGrid({
 }) {
   const [active, setActive] = useState<string>("all");
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const [cats, setCats] = useState<{ id: string; label: string }[]>([...galleryCategories]);
+
+  useEffect(() => {
+    let alive = true;
+    fetchCategories().then((live) => {
+      if (alive && live.length) setCats(live);
+    });
+    return () => {
+      alive = false;
+    };
+  }, []);
 
   const visible = useMemo(() => {
     const filtered =
@@ -46,11 +58,11 @@ export default function GalleryGrid({
 
   const counts = useMemo(() => {
     const map: Record<string, number> = { all: images.length };
-    for (const c of galleryCategories) {
+    for (const c of cats) {
       map[c.id] = images.filter((i) => i.category === c.id).length;
     }
     return map;
-  }, [images]);
+  }, [images, cats]);
 
   const close = useCallback(() => setOpenIndex(null), []);
   const step = useCallback(
@@ -88,7 +100,7 @@ export default function GalleryGrid({
             active={active === "all"}
             onClick={() => setActive("all")}
           />
-          {galleryCategories
+          {cats
             .filter((c) => counts[c.id] > 0)
             .map((c) => (
               <FilterChip
