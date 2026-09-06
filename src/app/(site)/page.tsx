@@ -7,7 +7,8 @@ import StoriesPreview from "@/components/home/StoriesPreview";
 import PartnerCTA from "@/components/home/PartnerCTA";
 import InquiryForm from "@/components/InquiryForm";
 import HomeGallery from "@/components/data/HomeGallery";
-import { ArrowRightIcon, MailIcon, PhoneIcon, PinIcon, WhatsAppIcon } from "@/components/icons";
+import { ArrowRightIcon, FacebookIcon, MailIcon, PhoneIcon, PinIcon, WhatsAppIcon } from "@/components/icons";
+import { site } from "@/lib/site";
 
 /**
  * Homepage — built around the sponsor journey:
@@ -67,30 +68,39 @@ export default async function HomePage() {
               <ContactRow
                 icon={<MailIcon className="h-5 w-5" />}
                 label="Email"
-                value="info@lelwakstars.org"
-                href="mailto:info@lelwakstars.org"
+                value={site.contact.email}
+                href={`mailto:${site.contact.email}`}
                 note="Best for proposals and formal enquiries"
-                pending
               />
               <ContactRow
                 icon={<PhoneIcon className="h-5 w-5" />}
                 label="Phone"
-                value="To be confirmed"
-                pending
+                value={site.contact.phone || "To be confirmed"}
+                href={site.contact.phone ? `tel:${site.contact.phone}` : undefined}
+                pending={!site.contact.phone}
               />
               <ContactRow
                 icon={<WhatsAppIcon className="h-5 w-5" />}
                 label="WhatsApp"
-                value="To be confirmed"
+                value={site.contact.whatsapp || "To be confirmed"}
                 note="Fastest way to reach us"
-                pending
+                pending={!site.contact.whatsapp}
               />
+              {site.socials.facebook ? (
+                <ContactRow
+                  icon={<FacebookIcon className="h-5 w-5" />}
+                  label="Facebook"
+                  value="Lelwak Stars CBO"
+                  href={site.socials.facebook}
+                  note="Follow field updates and community calls"
+                />
+              ) : null}
               <ContactRow
                 icon={<PinIcon className="h-5 w-5" />}
                 label="Based in"
-                value="Kenya"
-                note="County, sub-county and office address to be added"
-                pending
+                value={site.location.region}
+                note={site.location.addressLine || "Ward and office address to be added"}
+                pending={!site.location.addressLine}
               />
             </ul>
 
