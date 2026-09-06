@@ -1,3 +1,5 @@
+import { asset } from "@/lib/site";
+
 type IconProps = {
   className?: string;
   strokeWidth?: number;
@@ -277,24 +279,13 @@ export const programIcons = {
 /** Inline SVG wordmark — swap for a real logo file once provided. */
 export function Logo({ className = "h-9 w-9" }: IconProps) {
   return (
-    <svg viewBox="0 0 48 48" className={`${base} ${className}`} aria-hidden="true">
-      <circle cx="24" cy="24" r="23" fill="#14532D" />
-      <path
-        d="M24 39V22"
-        stroke="#D89B32"
-        strokeWidth="2.6"
-        strokeLinecap="round"
-        fill="none"
-      />
-      <path
-        d="M24 24c0-5.2-4.3-8.6-10.2-8.6C13.8 21.4 18.1 24.8 24 24Z"
-        fill="#22C55E"
-      />
-      <path
-        d="M24 27.5c0-5.2 4.3-8.6 10.2-8.6C34.2 24.9 29.9 28.3 24 27.5Z"
-        fill="#86EFAC"
-      />
-      <path d="m24 9 1.9 4 4.4.5-3.3 3 .9 4.4L24 18.7l-3.9 2.2.9-4.4-3.3-3 4.4-.5Z" fill="#D89B32" />
-    </svg>
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      src={asset("/logo-badge.png")}
+      alt="Lelwak Stars CBO"
+      width={40}
+      height={40}
+      className={`${className} rounded-full object-cover`}
+    />
   );
 }

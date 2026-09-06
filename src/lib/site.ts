@@ -39,7 +39,7 @@ export const site: SiteConfig = {
     addressLine: "", // TODO
   },
   contact: {
-    email: "info@lelwakstars.org", // TODO: confirm real address
+    email: "lelwakstarscbo@gmail.com",
     phone: "", // TODO
     whatsapp: "", // TODO: international format e.g. +2547XXXXXXXX
   },

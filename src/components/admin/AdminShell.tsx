@@ -15,6 +15,7 @@ import { usePathname } from "next/navigation";
 import { useState, type ReactNode } from "react";
 import { useAdmin } from "@/lib/admin-client";
 import { Btn, Field, inputCls, Notice, Spinner } from "@/components/admin/ui";
+import { Logo } from "@/components/icons";
 
 const NAV = [
   { href: "/admin", label: "Overview", icon: "◔" },
@@ -44,9 +45,7 @@ function Login({ onSignIn }: { onSignIn: (e: string, p: string) => Promise<strin
         }}
       >
         <div className="mb-6 flex items-center gap-3">
-          <span className="flex h-10 w-10 items-center justify-center rounded-full bg-forest-700 text-lg text-white">
-            🌱
-          </span>
+          <Logo className="h-10 w-10" />
           <div>
             <p className="font-display text-lg font-extrabold text-navy-900">Lelwak Stars Admin</p>
             <p className="text-[0.75rem] text-navy-700/55">Content & analytics dashboard</p>
@@ -107,7 +106,7 @@ export default function AdminShell({ children }: { children: ReactNode }) {
       {/* ------------------------------------------------------- sidebar */}
       <aside className="flex flex-col gap-6 border-b border-navy-700/10 bg-forest-950 px-5 py-6 lg:sticky lg:top-0 lg:h-screen lg:border-b-0">
         <Link href="/admin" className="flex items-center gap-2.5">
-          <span className="flex h-9 w-9 items-center justify-center rounded-full bg-leaf-500 text-base">🌱</span>
+          <Logo className="h-9 w-9" />
           <span>
             <span className="block font-display text-[0.9375rem] font-extrabold text-white">
               Lelwak Stars
