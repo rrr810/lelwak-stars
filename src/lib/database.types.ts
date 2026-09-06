@@ -45,6 +45,36 @@ type Json = string | number | boolean | null | Json[] | { [key: string]: Json };
 export type Database = {
   public: {
     Tables: {
+      page_views: {
+        Row: {
+          id: string;
+          session_id: string | null;
+          path: string;
+          referrer: string | null;
+          viewport_w: number | null;
+          view_day: string;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          session_id?: string | null;
+          path: string;
+          referrer?: string | null;
+          viewport_w?: number | null;
+          view_day?: string;
+          created_at?: string;
+        };
+        Update: {
+          id?: string;
+          session_id?: string | null;
+          path?: string;
+          referrer?: string | null;
+          viewport_w?: number | null;
+          view_day?: string;
+          created_at?: string;
+        };
+        Relationships: [];
+      };
       programs: {
         Row: {
           id: ProgramId;
@@ -274,6 +304,9 @@ export type Database = {
         };
         Update: Partial<Database["public"]["Tables"]["inquiries"]["Insert"]> & {
           status?: InquiryStatus;
+          notes?: string | null;
+          handled_by?: string | null;
+          handled_at?: string | null;
         };
         Relationships: [];
       };
